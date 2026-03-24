@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍅 番茄钟看板</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #FFF59D 0%, #C5E1A5 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #2E7D32;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0 #FFF59D;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #FFF59D 0%, #FFE082 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px solid #2E7D32;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2E7D32;
+        }
+        .stat-label {
+            font-size: 0.9em;
+            color: #558B2F;
+            margin-top: 5px;
+        }
+        .sessions {
+            margin-top: 30px;
+        }
+        .session-card {
+            background: #F1F8E9;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 5px solid #8BC34A;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .session-info {
+            flex: 1;
+        }
+        .session-task {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #2E7D32;
+        }
+        .session-time {
+            color: #689F38;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .session-badge {
+            background: #8BC34A;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #689F38;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍅 番茄钟看板</h1>
+        <div class="stats" id="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="todayCount">-</div>
+                <div class="stat-label">今日番茄</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="todayTime">-</div>
+                <div class="stat-label">今日时长（分钟）</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="totalCount">-</div>
+                <div class="stat-label">总计番茄</div>
+            </div>
+        </div>
+        <div class="sessions">
+            <h2 style="color: #2E7D32; margin-bottom: 15px;">📋 最近记录</h2>
+            <div id="sessionList" class="loading">加载中...</div>
+        </div>
+    </div>
+    <script>
+        async function loadData() {
+            try {
+                const response = await fetch('sessions.json');
+                const data = await response.json();
+                const sessions = data.sessions || [];
+                
+                // 计算统计
+                const today = new Date().toISOString().split('T')[0];
+                const todaySessions = sessions.filter(s => s.date === today);
+                const todayTime = todaySessions.reduce((sum, s) => sum + s.actualDuration, 0);
+                
+                document.getElementById('todayCount').textContent = todaySessions.length;
+                document.getElementById('todayTime').textContent = todayTime;
+                document.getElementById('totalCount').textContent = sessions.length;
+                
+                // 显示最近10个
+                const recent = sessions.slice(-10).reverse();
+                const html = recent.map(s => `
+                    <div class="session-card">
+                        <div class="session-info">
+                            <div class="session-task">${s.task}</div>
+                            <div class="session-time">
+                                ${s.date} ${s.startTime}-${s.endTime} | ${s.actualDuration}分钟
+                            </div>
+                        </div>
+                        <div class="session-badge">${s.status === 'complete' ? '✅ 完成' : '⚡ 中断'}</div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('sessionList').innerHTML = html || '<p style="text-align:center;color:#999;">暂无记录</p>';
+            } catch (error) {
+                document.getElementById('sessionList').innerHTML = '<p style="text-align:center;color:red;">加载失败</p>';
+            }
+        }
+        
+        loadData();
+        setInterval(loadData, 30000); // 每30秒刷新
+    </script>
+</body>
+</html>
