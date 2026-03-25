@@ -23,6 +23,9 @@ echo ""
 
 # Step 1: Extract Chinese text and generate tokens
 echo "📝 Step 1: Extracting Chinese text..."
+echo "  Warning: extract --write will modify source files (Chinese text -> tokens)"
+echo "  Recommend backing up with git first"
+echo ""
 python3 "$SCRIPT_DIR/main.py" extract \
   --root "$INPUT" \
   --lang zh-CN \

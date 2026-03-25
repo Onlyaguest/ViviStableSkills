@@ -1,26 +1,33 @@
 #!/usr/bin/env bash
-# Pomodoro Dashboard Generator - 生成看板并部署到 Vercel
+# Pomodoro Dashboard Generator
 
 set -euo pipefail
 
-BASE_DIR="$HOME/.openclaw/workspace/skills/pomodoro"
-DATA_DIR="$BASE_DIR/data"
-SITE_DIR="$HOME/MyOpenClawWebsite/sites/pomodoro"
-GIT_DIR="$HOME/MyOpenClawWebsite"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+BASE_DIR="$(dirname "$SCRIPT_DIR")"
+DATA_DIR="${POMODORO_DATA_DIR:-$BASE_DIR/data}"
+SITE_DIR="${POMODORO_SITE_DIR:?Error: please set POMODORO_SITE_DIR (e.g. ~/my-site/pomodoro)}"
+GIT_DIR="${POMODORO_GIT_DIR:?Error: please set POMODORO_GIT_DIR (e.g. ~/my-site)}"
 
-# 确保目录存在
+# Ensure directories exist
 mkdir -p "$SITE_DIR"
 
-# 复制 HTML 模板（静态 HTML 通过 JS 读取 JSON）
+# Copy HTML template and data
 cp "$BASE_DIR/assets/index.html" "$SITE_DIR/index.html"
-
-# 复制 JSON 数据（供前端读取）
 cp "$DATA_DIR/sessions.json" "$SITE_DIR/sessions.json"
 
-# Git 提交并推送
+# Git commit
 cd "$GIT_DIR"
-git add sites/pomodoro/
-git commit -m "🍅 Pomodoro dashboard update $(date '+%Y-%m-%d %H:%M')" || true
-git push origin main
+git add "$(basename "$SITE_DIR")/"
+git commit -m "pomodoro: dashboard update $(date '+%Y-%m-%d %H:%M')" || true
 
-echo "✅ Dashboard deployed: https://your-site.vercel.app/sites/pomodoro/"
+echo "Ready to push to remote..."
+echo "  Branch: $(git branch --show-current)"
+echo "  Remote: $(git remote get-url origin 2>/dev/null || echo 'not configured')"
+read -p "Confirm push? (y/N) " confirm
+if [[ "$confirm" =~ ^[Yy]$ ]]; then
+  git push
+  echo "Dashboard deployed"
+else
+  echo "Push skipped (local commit preserved)"
+fi

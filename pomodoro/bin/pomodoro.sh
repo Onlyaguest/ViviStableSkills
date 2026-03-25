@@ -2,8 +2,9 @@
 set -euo pipefail
 
 SCRIPT_PATH="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"
-BASE_DIR="$HOME/.openclaw/workspace/skills/pomodoro"
-DATA_DIR="$BASE_DIR/data"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+BASE_DIR="$(dirname "$SCRIPT_DIR")"
+DATA_DIR="${POMODORO_DATA_DIR:-$BASE_DIR/data}"
 STATE_FILE="$DATA_DIR/current.json"
 LOG_FILE="$DATA_DIR/sessions.json"
 
@@ -49,7 +50,6 @@ EOF
   (
     sleep $((duration * 60))
     if [ -f "$STATE_FILE" ]; then
-      local st
       st=$(python3 -c "import json;print(json.load(open('$STATE_FILE')).get('status',''))")
       if [ "$st" = "running" ]; then
         "$SCRIPT_PATH" done "自动完成"
@@ -111,10 +111,10 @@ PY
 rm -f "$STATE_FILE"
 
 # 写入 Roam Research
-if command -v bb &> /dev/null; then
+if [ -n "${ROAM_GRAPH:-}" ] && command -v bb &> /dev/null; then
   local icon
   icon=$([[ "$final_status" = "complete" ]] && echo "🍅" || echo "⚡")
-  (cd ~/qq && bb roam-write :yuanvv "${icon} 番茄钟：${task}（${duration}分钟）#番茄钟") 2>/dev/null || true
+  (cd ~/qq && bb roam-write ":$ROAM_GRAPH" "${icon} 番茄钟：${task}（${duration}分钟）#番茄钟") 2>/dev/null || true
 fi
 
 if [ "$final_status" = "complete" ]; then

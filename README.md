@@ -4,34 +4,27 @@ Stable, production-ready skills for AI agents.
 
 ## Available Skills
 
-- [i18n-translator](./i18n-translator/) - Multi-language website translation with AI
-- [pomodoro](./pomodoro/) - AI-powered Pomodoro timer with auto-completion, Roam sync, and live dashboard
-
-## Usage
-
-Each skill is self-contained with:
-- SKILL.md - Main documentation
-- README.md - Quick start guide
-- Scripts/tools - Ready to use
-- Examples - Real-world use cases
-
-Clone and use directly in your AI agent workspace.
+| Skill | Description | Platform |
+|-------|------------|----------|
+| [pomodoro](./pomodoro/) | AI-powered Pomodoro timer with auto-completion and local logging | macOS |
+| [i18n-translator](./i18n-translator/) | Multi-language website translation with AI (Gemini) | all |
 
 ## Quick Start
 
 ```bash
-# Clone the repository
 git clone https://github.com/Onlyaguest/ViviStableSkills.git
 cd ViviStableSkills
 
-# Use a skill
-cd pomodoro
-./bin/pomodoro.sh start "写代码" 25
+# Example: start a pomodoro
+cd pomodoro && ./bin/pomodoro.sh start "coding" 25
+
+# Example: translate a website
+cd i18n-translator && ./auto-translate.sh ~/my-site "en-US,ja-JP"
 ```
 
 ## Contributing
 
-Found a bug? Have a feature request? Submit an issue or PR!
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on adding new skills.
 
 ## License
 

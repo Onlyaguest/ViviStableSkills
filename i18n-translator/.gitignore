@@ -1,28 +1,16 @@
-# Python
-__pycache__/
-*.py[cod]
-*.class
-*.so
-.Python
-env/
-venv/
-.env
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-logs/
-
-# Test outputs
-test_output/
+# Runtime output
 *__multilang__*/
 *__all-langs__*/
+i18n/logs/
+
+# Sensitive files
+.env
+.env.*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# System
+.DS_Store

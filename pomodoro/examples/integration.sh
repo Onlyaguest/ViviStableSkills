@@ -48,7 +48,7 @@ example_roam_integration() {
     echo "=== Example 3: Roam Research Integration ==="
     
     # Get today's tasks from Roam (simulated)
-    # In real scenario: bb roam-query :yuanvv '[:find ?task ...]'
+    # In real scenario: bb roam-query :$ROAM_GRAPH '[:find ?task ...]'
     
     tasks=(
         "学习新技能"

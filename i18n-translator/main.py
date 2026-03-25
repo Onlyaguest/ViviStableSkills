@@ -628,7 +628,7 @@ def apply_translations(
 
     if out_dir is not None:
         if out_dir.exists():
-            raise RuntimeError(f"Output dir already exists: {out_dir}")
+            shutil.rmtree(out_dir)
         if not dry_run:
             shutil.copytree(root, out_dir)
         effective_root = out_dir if not dry_run else root
