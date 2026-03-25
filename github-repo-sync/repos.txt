@@ -1,0 +1,10 @@
+# One repository per line.
+# Supported forms:
+#   owner/repo
+#   https://github.com/owner/repo.git
+#   git@github.com:owner/repo.git
+#
+# Examples:
+# openai/openai-cookbook
+# https://github.com/octocat/Spoon-Knife.git
+# git@github.com:your-org/private-repo.git

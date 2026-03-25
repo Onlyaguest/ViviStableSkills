@@ -1,0 +1,14 @@
+# Runtime
+logs/
+
+# Sensitive files
+.env
+.env.*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# System
+.DS_Store
