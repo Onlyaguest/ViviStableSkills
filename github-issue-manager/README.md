@@ -1,44 +1,39 @@
 # GitHub Issue Manager
 
-自动化 GitHub Issue 创建和管理工具。
+Create and manage GitHub Issues from the command line with structured templates.
 
-## 快速开始
-
-### 1. 设置 GitHub Token
+## Quick Start
 
 ```bash
-# 方法 A：环境变量
 export GITHUB_TOKEN="ghp_your_token_here"
 
-# 方法 B：使用 gh CLI
-gh auth login
+# Preview (dry run)
+./create-issue.sh --repo owner/repo --title "Add feature X" --type feature --dry-run
+
+# Create issue
+./create-issue.sh --repo owner/repo --title "Add feature X" --type feature --priority high
 ```
 
-### 2. 创建 Issue
+## Commands
 
-```bash
-./create-issue.sh \
-  --repo "owner/repo" \
-  --title "功能标题" \
-  --type feature \
-  --priority high
-```
+| Option | Description |
+|--------|-------------|
+| `--repo OWNER/REPO` | Target repository (required) |
+| `--title TEXT` | Issue title (required) |
+| `--type TYPE` | `feature` / `bug` / `enhancement` |
+| `--priority LEVEL` | `high` / `medium` / `low` |
+| `--phase N` | Phase: `1` / `2` / `3` |
+| `--body TEXT` | Custom body text |
+| `--labels L1,L2` | Extra labels |
+| `--template FILE` | Custom template |
+| `--dry-run` | Preview without creating |
 
-## 功能特性
+## Requirements
 
-- ✅ 结构化 Issue 模板
-- ✅ 自动标签管理
-- ✅ 命令触发（/bug, /feature）
-- ✅ GitHub API 集成
+- `GITHUB_TOKEN` env var ([get one here](https://github.com/settings/tokens))
+- `jq` (`brew install jq`)
+- `curl`
 
-## 文档
+## Full Documentation
 
-详细文档请查看 [SKILL.md](./SKILL.md)
-
-## 安全提示
-
-⚠️ **永远不要把 GitHub Token 提交到 Git！**
-
-- 使用环境变量
-- 添加到 .gitignore
-- 定期轮换 token
+See [SKILL.md](./SKILL.md) for complete reference.

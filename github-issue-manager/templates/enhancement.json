@@ -1,0 +1,5 @@
+{
+  "title": "Enhancement title",
+  "body": "## Current Behavior\nHow it works now.\n\n## Proposed Improvement\nWhat should change.\n\n## Motivation\nWhy this improvement matters.\n\n## Acceptance Criteria\n- [ ] Criterion 1",
+  "labels": ["enhancement"]
+}

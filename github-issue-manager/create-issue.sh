@@ -2,7 +2,7 @@
 # GitHub Issue Creator
 # 使用 GitHub API 创建 Issue
 
-set -e
+set -euo pipefail
 
 # 默认值
 REPO=""
@@ -12,6 +12,7 @@ TYPE="feature"
 PRIORITY="medium"
 PHASE=""
 LABELS=""
+DRY_RUN=false
 
 # 帮助信息
 show_help() {
@@ -27,6 +28,7 @@ show_help() {
     --phase NUMBER      阶段: 1|2|3 (可选)
     --labels LABELS     额外标签，逗号分隔 (可选)
     --template FILE     使用自定义模板文件 (可选)
+    --dry-run           预览 Issue 内容，不实际创建
     -h, --help          显示帮助信息
 
 环境变量:
@@ -78,6 +80,10 @@ while [[ $# -gt 0 ]]; do
         --template)
             TEMPLATE="$2"
             shift 2
+            ;;
+        --dry-run)
+            DRY_RUN=true
+            shift
             ;;
         -h|--help)
             show_help
@@ -161,13 +167,24 @@ fi
 TEMP_FILE=$(mktemp)
 echo "$ISSUE_JSON" > "$TEMP_FILE"
 
-# 调用 GitHub API
-echo "正在创建 Issue..."
+# 预览信息
 echo "仓库: $REPO"
 echo "标题: $TITLE"
 echo "类型: $TYPE"
 echo "标签: $LABEL_ARRAY"
 echo ""
+
+if [ "$DRY_RUN" = true ]; then
+    echo "[DRY RUN] Issue 内容预览："
+    echo "$ISSUE_JSON" | jq '.'
+    echo ""
+    echo "（未创建，使用时去掉 --dry-run 即可）"
+    rm -f "$TEMP_FILE"
+    exit 0
+fi
+
+# 调用 GitHub API
+echo "正在创建 Issue..."
 
 RESPONSE=$(curl -s -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \

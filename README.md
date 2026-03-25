@@ -9,6 +9,7 @@ Stable, production-ready skills for AI agents.
 | [pomodoro](./pomodoro/) | AI-powered Pomodoro timer with auto-completion and local logging | macOS |
 | [i18n-translator](./i18n-translator/) | Multi-language website translation with AI (Gemini) | all |
 | [github-repo-sync](./github-repo-sync/) | Sync GitHub repos to local disk with scheduled execution | macOS / Linux |
+| [github-issue-manager](./github-issue-manager/) | Create GitHub Issues from CLI with templates and labels | all |
 
 ## Quick Start
 

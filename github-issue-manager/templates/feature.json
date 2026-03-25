@@ -1,5 +1,5 @@
 {
-  "title": "功能标题（请修改）",
-  "body": "## 功能描述\n支持从 iPhone 采集屏幕时间数据，与 Mac 端数据合并，形成完整的跨设备使用画像。\n\n## 使用场景\n当前系统只监控 Mac 的数据，但用户的实际使用分布在多个设备。\n\n**缺少移动端数据会导致：**\n- ❌ 低估实际使用时间\n- ❌ 数据不完整\n- ❌ 分析不准确\n\n## 验收标准\n- [ ] 能够采集移动端数据\n- [ ] 数据合并去重\n- [ ] Dashboard 显示完整数据\n- [ ] 基于完整数据进行分析\n\n## 技术考虑\n**数据源选项：**\n1. 直接读取本地数据库\n2. 使用 API 接口\n3. 通过 Webhook 推送\n\n**数据处理策略：**\n- 按时间段合并\n- 处理时间重叠\n- 设备标识",
-  "labels": ["feature", "priority-high", "phase-1"]
+  "title": "Feature title",
+  "body": "## Description\nBrief description of the feature.\n\n## Use Case\nWhy is this feature needed?\n\n## Acceptance Criteria\n- [ ] Criterion 1\n- [ ] Criterion 2\n\n## Technical Notes\nAny implementation considerations.",
+  "labels": ["feature"]
 }
