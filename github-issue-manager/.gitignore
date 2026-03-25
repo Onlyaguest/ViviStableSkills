@@ -1,0 +1,22 @@
+# Secrets and tokens
+secrets.edn
+*.token
+.env
+.env.local
+
+# Temporary files
+*.tmp
+/tmp/
+*.log
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test outputs
+test-output/
