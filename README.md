@@ -8,6 +8,7 @@ Stable, production-ready skills for AI agents.
 |-------|------------|----------|
 | [pomodoro](./pomodoro/) | AI-powered Pomodoro timer with auto-completion and local logging | macOS |
 | [i18n-translator](./i18n-translator/) | Multi-language website translation with AI (Gemini) | all |
+| [prompt-cards](./prompt-cards/) | Modular prompt card system with meta prompts, role cards, and workflows | all |
 | [github-repo-sync](./github-repo-sync/) | Sync GitHub repos to local disk with scheduled execution | macOS / Linux |
 | [github-issue-manager](./github-issue-manager/) | Create GitHub Issues from CLI with templates and labels | all |
 
@@ -22,6 +23,9 @@ cd pomodoro && ./bin/pomodoro.sh start "coding" 25
 
 # Example: translate a website
 cd i18n-translator && ./auto-translate.sh ~/my-site "en-US,ja-JP"
+
+# Example: use a prompt card
+cd prompt-cards && cat roles/pop-art-web-generator.md
 ```
 
 ## Contributing
