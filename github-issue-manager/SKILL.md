@@ -1,7 +1,7 @@
 ---
 name: github-issue-manager
 description: Create and manage GitHub Issues from the command line with templates and label automation.
-version: 1.0.0
+version: 1.1.0
 author: Vivi
 tags: [github, issues, automation, project-management]
 platforms: [all]
@@ -78,6 +78,95 @@ Get a token at: https://github.com/settings/tokens
 ### Phase (optional)
 
 `phase-1` · `phase-2` · `phase-3`
+
+## Issue Lifecycle & Closing Workflow
+
+### Issue Type Classification
+
+Issues fall into two categories based on their nature and who handles closure:
+
+#### Functional Issues (功能类)
+
+Issues that require implementation work by the development team.
+
+**Types:**
+- `feature` - New functionality to be implemented
+- `bug` - Broken functionality to be fixed
+- `enhancement` - Improvements to existing features
+
+**Closing responsibility:** Development team (e.g., ems-crew)  
+**Closing timing:** After implementation is complete and tested  
+**State reason:** `completed`
+
+**Examples:**
+- "Add AI classification for Roam blocks"
+- "Fix database write issue"
+- "Improve Dashboard UI/UX"
+
+#### Administrative Issues (管理类)
+
+Issues that don't require implementation, closed for coordination/management reasons.
+
+**Types:**
+- `duplicate` - Already covered by another issue
+- `invalid` - Not a valid issue or request
+- `wontfix` - Decided not to implement
+- `documentation` - Documentation-only changes
+
+**Closing responsibility:** Project coordinator (e.g., 元虾虾)  
+**Closing timing:** Immediately when identified  
+**State reason:** `not_planned`
+
+**Examples:**
+- "Issue #10 (duplicate of Issue #9)"
+- "Invalid feature request"
+- "Out of scope for current phase"
+
+### Closing Workflow
+
+#### For Functional Issues (by development team)
+
+```bash
+# Close when implementation is complete
+curl -X PATCH \
+  -H "Authorization: token $GITHUB_TOKEN" \
+  -H "Accept: application/vnd.github.v3+json" \
+  https://api.github.com/repos/OWNER/REPO/issues/NUMBER \
+  -d '{"state": "closed", "state_reason": "completed"}'
+```
+
+**Best practices:**
+- Close only after implementation + testing + verification
+- Reference the closing commit in a comment
+- Update the issue with final status before closing
+
+#### For Administrative Issues (by coordinator)
+
+```bash
+# Close duplicate/invalid/wontfix issues
+curl -X PATCH \
+  -H "Authorization: token $GITHUB_TOKEN" \
+  -H "Accept: application/vnd.github.v3+json" \
+  https://api.github.com/repos/OWNER/REPO/issues/NUMBER \
+  -d '{"state": "closed", "state_reason": "not_planned"}'
+```
+
+**Best practices:**
+- Add a comment explaining why (e.g., "Duplicate of #9")
+- Close immediately to keep the issue list clean
+- Link to the related issue if applicable
+
+### When to Close Issues
+
+| Scenario | Who Closes | When | State Reason |
+|----------|------------|------|--------------|
+| Feature implemented & tested | Dev team | After verification | `completed` |
+| Bug fixed & verified | Dev team | After testing | `completed` |
+| Enhancement deployed | Dev team | After deployment | `completed` |
+| Duplicate identified | Coordinator | Immediately | `not_planned` |
+| Invalid request | Coordinator | Immediately | `not_planned` |
+| Won't implement | Coordinator | After decision | `not_planned` |
+| Documentation only | Either | After merge | `completed` |
 
 ## Templates
 
