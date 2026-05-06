@@ -1,0 +1,15 @@
+# Runtime output
+workspace/
+logs/
+
+# Environment / secrets
+.env
+.env.*
+credentials.json
+
+# System / editor
+.DS_Store
+__pycache__/
+*.pyc
+node_modules/
+.venv/

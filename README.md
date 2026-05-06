@@ -12,6 +12,7 @@ Stable, production-ready skills for AI agents.
 | [github-repo-sync](./github-repo-sync/) | Sync GitHub repos to local disk with scheduled execution | macOS / Linux |
 | [github-issue-manager](./github-issue-manager/) | Create GitHub Issues from CLI with templates and labels | all |
 | [cleandesktop](./cleandesktop/) | Desktop file organizer - auto-archive by week with CSV logging | macOS / Linux |
+| [agora-convoai-quickstart](./agora-convoai-quickstart/) | One-command setup and run for Agora Conversational AI quickstart demo | macOS / Linux |
 
 ## Quick Start
 
