@@ -1,0 +1,16 @@
+# Runtime data
+data/
+output/
+
+# Sensitive files
+.env
+.env.*
+credentials.json
+**/secrets/
+
+# System / editor
+.DS_Store
+__pycache__/
+*.pyc
+node_modules/
+.venv/

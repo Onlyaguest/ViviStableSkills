@@ -13,6 +13,7 @@ Stable, production-ready skills for AI agents.
 | [github-issue-manager](./github-issue-manager/) | Create GitHub Issues from CLI with templates and labels | all |
 | [cleandesktop](./cleandesktop/) | Desktop file organizer - auto-archive by week with CSV logging | macOS / Linux |
 | [agora-convoai-quickstart](./agora-convoai-quickstart/) | One-command setup and run for Agora Conversational AI quickstart demo | macOS / Linux |
+| [yao-prompt-router](./yao-prompt-router/) | Smart router for 102 Chinese AI prompt templates (yao-open-prompts) | all |
 
 ## Quick Start
 
@@ -28,6 +29,9 @@ cd i18n-translator && ./auto-translate.sh ~/my-site "en-US,ja-JP"
 
 # Example: use a prompt card
 cd prompt-cards && cat roles/pop-art-web-generator.md
+
+# Example: install yao-prompt-router (standalone, no need to clone this repo)
+curl -fsSL https://raw.githubusercontent.com/Onlyaguest/ViviStableSkills/main/yao-prompt-router/install.sh | bash
 ```
 
 ## Contributing
