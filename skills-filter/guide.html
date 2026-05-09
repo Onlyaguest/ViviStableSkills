@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>skills-filter Guide</title>
+  <style>
+    :root {
+      --bg:#fbf7ef;
+      --bg2:#efe1c7;
+      --card:#ffffff;
+      --ink:#222222;
+      --muted:#61594d;
+      --line:#d8c9aa;
+      --green:#2f6b4f;
+      --amber:#b36a18;
+      --red:#9b3d2f;
+      --shadow:0 18px 40px rgba(76,55,17,.12);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"IBM Plex Sans","Segoe UI",sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(179,106,24,.12), transparent 24%),
+        linear-gradient(180deg,var(--bg),var(--bg2));
+    }
+    code,pre,.pill{font-family:"JetBrains Mono",Consolas,monospace}
+    .wrap{width:min(1100px,calc(100% - 24px));margin:0 auto;padding:28px 0 56px}
+    .hero,.section{background:rgba(255,255,255,.82);backdrop-filter:blur(8px);box-shadow:var(--shadow);border:1px solid rgba(216,201,170,.8)}
+    .hero{display:grid;grid-template-columns:1.06fr .94fr;gap:18px;padding:28px;border-radius:28px}
+    .eyebrow{display:inline-block;padding:8px 12px;border-radius:999px;background:#f2eadc;color:#6c5735;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+    h1{margin:14px 0 10px;font-size:clamp(38px,6vw,60px);line-height:.95;letter-spacing:-.04em}
+    .hero p{margin:0;color:var(--muted);line-height:1.7;font-size:17px}
+    .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .pill{padding:10px 14px;border-radius:999px;background:#f7f0e3;border:1px solid var(--line);font-size:12px}
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .stat{padding:18px;border-radius:20px;background:#fffaf1;border:1px solid var(--line)}
+    .stat .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a7759}
+    .stat .v{margin-top:8px;font-size:30px;font-weight:800}
+    .stat .n{margin-top:8px;color:var(--muted);line-height:1.6;font-size:13px}
+    .section{margin-top:20px;padding:24px;border-radius:22px}
+    .header{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+    .header h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1}
+    .header p{margin:0;max-width:46ch;color:var(--muted);line-height:1.65}
+    .grid3,.grid2{display:grid;gap:12px}
+    .grid3{grid-template-columns:repeat(3,1fr)}
+    .grid2{grid-template-columns:repeat(2,1fr)}
+    .card,.panel{padding:18px;border-radius:18px;border:1px solid var(--line)}
+    .card{background:linear-gradient(180deg,#fff,#faf2e3)}
+    .panel{background:#fffdfa}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:#f0e4ce;color:#7f5f2b;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    pre{margin:0;padding:16px;border-radius:16px;background:#1f2933;color:#e4fff0;overflow-x:auto;line-height:1.55;font-size:13px}
+    ul{margin:0;padding-left:18px}
+    li{margin:8px 0;line-height:1.6}
+    .good{color:var(--green)} .mid{color:var(--amber)} .bad{color:var(--red)}
+    .footer{margin-top:18px;text-align:center;color:#6a5f4b;font-size:14px}
+    @media (max-width:980px){.hero,.grid3,.grid2{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.wrap{width:min(100% - 16px,1100px)}.hero,.section{padding:18px;border-radius:20px}.stats{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Phase 2 Fast Win</div>
+        <h1>skills-filter</h1>
+        <p>在你开始做一个新 skill 之前，先过这 5 个问题。它的目标不是产出文档，而是尽快拦住“通用 AI wrapper”这种低价值方向。</p>
+        <div class="pills">
+          <span class="pill">Input: skill idea</span>
+          <span class="pill">Output: build / deepen / reject</span>
+          <span class="pill">Validation: <code>--example</code></span>
+          <span class="pill">Best fit: skill triage</span>
+        </div>
+      </div>
+      <div class="stats">
+        <article class="stat"><div class="k">Question Count</div><div class="v">5</div><div class="n">全部是 yes/no，没有模糊打分。</div></article>
+        <article class="stat"><div class="k">Primary Goal</div><div class="v">Kill Bad Ideas Fast</div><div class="n">先拦掉泛化包装，再决定要不要投入工程时间。</div></article>
+        <article class="stat"><div class="k">Good Outcome</div><div class="v good">5/5</div><div class="n">说明这个方向有差异化、有积累、有壁垒。</div></article>
+        <article class="stat"><div class="k">Bad Outcome</div><div class="v bad">0-2/5</div><div class="n">说明它大概率只是换皮，应该停手或重构命题。</div></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>5 Questions</h2><p>这 5 个问题就是这个 skill 的核心。它不复杂，但要被稳定复用。</p></div>
+      <div class="grid3">
+        <article class="card"><div class="tag">01</div><h3>差异化</h3><p>跟“直接丢给 AI”有什么明显区别？</p></article>
+        <article class="card"><div class="tag">02</div><h3>垂直性</h3><p>有行业偏向性或场景偏向性吗？</p></article>
+        <article class="card"><div class="tag">03</div><h3>积累性</h3><p>会越用越聪明吗？</p></article>
+        <article class="card"><div class="tag">04</div><h3>难度</h3><p>用户自己很难做到吗？</p></article>
+        <article class="card"><div class="tag">05</div><h3>壁垒</h3><p>有壁垒吗？</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>How To Use</h2><p>先跑一个内置示例，确认这个筛选器的口径，再拿真实 skill 想法进来打分。</p></div>
+      <div class="grid2">
+        <div class="panel"><h3>最小验证</h3><pre>cd /Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/skills-filter
+python3 main.py --example lawyer-email-assistant</pre></div>
+        <div class="panel"><h3>真实评估</h3><pre>cd /Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/skills-filter
+python3 main.py --title "创业者精力风控系统" --answers y,y,y,y,y</pre></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>Decision Bands</h2><p>评分不是为了显得科学，而是为了快速决策。</p></div>
+      <div class="grid2">
+        <article class="panel"><h3 class="good">值得做</h3><ul><li><span class="good">5/5</span>：立即做</li><li><span class="mid">3-4/5</span>：可以做，但先补 moat</li></ul></article>
+        <article class="panel"><h3 class="bad">不值得做</h3><ul><li><span class="bad">1-2/5</span>：不要做</li><li><span class="bad">0/5</span>：绝对不要做</li></ul></article>
+      </div>
+    </section>
+
+    <div class="footer">Open locally: <code>/Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/skills-filter/guide.html</code></div>
+  </div>
+</body>
+</html>

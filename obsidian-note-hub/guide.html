@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>obsidian-note-hub Guide</title>
+  <style>
+    :root {
+      --bg:#101418;
+      --bg2:#1b2430;
+      --paper:#f7f4ec;
+      --paper2:#efe5d5;
+      --ink:#18212b;
+      --muted:#52606d;
+      --line:#c9bca8;
+      --olive:#4d5b3d;
+      --orange:#c56a2d;
+      --teal:#1f6f78;
+      --shadow:0 24px 56px rgba(16,20,24,.24);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Avenir Next","Segoe UI",sans-serif;
+      color:var(--paper);
+      background:
+        radial-gradient(circle at top right, rgba(197,106,45,.18), transparent 24%),
+        radial-gradient(circle at top left, rgba(31,111,120,.18), transparent 22%),
+        linear-gradient(180deg,var(--bg),var(--bg2));
+    }
+    code,pre,.chip{font-family:"JetBrains Mono",Consolas,monospace}
+    .wrap{width:min(1120px,calc(100% - 24px));margin:0 auto;padding:28px 0 56px}
+    .hero{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;padding:28px;border-radius:30px;background:rgba(16,20,24,.84);border:1px solid rgba(239,229,213,.12);box-shadow:var(--shadow)}
+    .eyebrow{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(239,229,213,.08);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+    h1{margin:14px 0 10px;font-size:clamp(38px,6vw,62px);line-height:.95;letter-spacing:-.04em}
+    .hero p{margin:0;color:#ddd3c3;line-height:1.7;font-size:17px;max-width:60ch}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .chip{padding:10px 14px;border-radius:999px;background:rgba(239,229,213,.08);border:1px solid rgba(239,229,213,.12);font-size:12px}
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .stat{padding:18px;border-radius:20px;background:rgba(239,229,213,.08);border:1px solid rgba(239,229,213,.12)}
+    .stat .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#d6c6a8}
+    .stat .v{margin-top:8px;font-size:28px;font-weight:800}
+    .stat .n{margin-top:8px;color:#ddd3c3;line-height:1.6;font-size:13px}
+    .section{margin-top:20px;padding:24px;border-radius:24px;background:var(--paper);color:var(--ink);box-shadow:var(--shadow)}
+    .header{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+    .header h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1;letter-spacing:-.03em}
+    .header p{margin:0;max-width:48ch;color:var(--muted);line-height:1.65}
+    .grid3,.grid2{display:grid;gap:12px}
+    .grid3{grid-template-columns:repeat(3,1fr)}
+    .grid2{grid-template-columns:repeat(2,1fr)}
+    .card,.panel{padding:18px;border-radius:18px;border:1px solid var(--line)}
+    .card{background:linear-gradient(180deg,#fff8ee,var(--paper2))}
+    .panel{background:#fffdf8}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(77,91,61,.12);color:var(--olive);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .card h3,.panel h3{margin:10px 0 8px;font-size:22px}
+    pre{margin:0;padding:16px;border-radius:16px;background:#17212b;color:#ecfdf5;overflow-x:auto;line-height:1.55;font-size:13px}
+    ul{margin:0;padding-left:18px}
+    li{margin:8px 0;line-height:1.6}
+    .footer{margin-top:18px;text-align:center;color:#d6c6a8;font-size:14px}
+    @media (max-width:980px){.hero,.grid3,.grid2{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.wrap{width:min(100% - 16px,1120px)}.hero,.section{padding:18px;border-radius:20px}.stats{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Phase 1 Graduation Template</div>
+        <h1>obsidian-note-hub</h1>
+        <p>把一整族 Obsidian 笔记工具收敛成一个稳定入口。它不是把所有子工具重做一遍，而是给现有 `MyNotesTools` 一层可审核、可调度、可复用的统一入口。</p>
+        <div class="chips">
+          <span class="chip">Input: notes repo + vault</span>
+          <span class="chip">Output: unified dispatch</span>
+          <span class="chip">Validation: <code>list</code> + <code>check</code></span>
+          <span class="chip">Best fit: note ops orchestration</span>
+        </div>
+      </div>
+      <div class="stats">
+        <article class="stat"><div class="k">Boundary</div><div class="v">Orchestrator</div><div class="n">稳定的是“统一入口”，不是复制所有下游任务。</div></article>
+        <article class="stat"><div class="k">Review Mode</div><div class="v">No Side Effects</div><div class="n">`list` 和 `check` 都适合审核，不碰 vault 内容。</div></article>
+        <article class="stat"><div class="k">Skill Family</div><div class="v">Note Ops</div><div class="n">后续还能继续拆出 `meeting-archive`、`template-workflow` 等子 skill。</div></article>
+        <article class="stat"><div class="k">Phase 1 Fit</div><div class="v">High</div><div class="n">它已经是成熟工作流的 front door，最适合先毕业。</div></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>What Changed</h2><p>这轮稳定化不是“复制仓库”，而是把入口口径、校验方式和使用说明稳定下来。</p></div>
+      <div class="grid3">
+        <article class="card"><div class="tag">01</div><h3>统一命名</h3><p>把原本仓库内部的 `note-hub` 毕业成可对外复用的 `obsidian-note-hub`。</p></article>
+        <article class="card"><div class="tag">02</div><h3>补 `check`</h3><p>新增无副作用检查命令，校验 `REPO_ROOT`、任务映射和可选 vault 配置。</p></article>
+        <article class="card"><div class="tag">03</div><h3>补审核材料</h3><p>把边界、命令、最小验证和使用场景压成一页 guide，审核和交接都更轻。</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>How To Validate</h2><p>先看公开命令面，再验证配置和 task 映射，避免一上来就改 vault。</p></div>
+      <div class="grid2">
+        <div class="panel"><h3>命令面预览</h3><pre>cd /Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/obsidian-note-hub
+python3 main.py list</pre></div>
+        <div class="panel"><h3>最小配置检查</h3><pre>cd /Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/obsidian-note-hub
+REPO_ROOT=/Users/yangyuan/Desktop/Codex版小工具upup/MyNotesTools \
+VAULT_ROOT="/Users/yangyuan/Library/Mobile Documents/iCloud~md~obsidian/Documents/ViviNotes" \
+python3 main.py check</pre></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>What It Wraps</h2><p>审核时要看清边界：它管理入口，不重新实现每个原子 task。</p></div>
+      <div class="grid2">
+        <article class="panel"><h3>Typical Commands</h3><ul><li><code>clean</code> / <code>inbox-clean</code></li><li><code>merge</code> / <code>merge-ai</code></li><li><code>lint</code> / <code>fix</code> / <code>normalize</code></li><li><code>meeting-archive</code></li><li><code>daily-rollover</code></li><li><code>docs-sync</code></li></ul></article>
+        <article class="panel"><h3>Constraint</h3><ul><li>真实执行依赖现有 `MyNotesTools` 仓库</li><li>不适合脱离 notes repo 单独运行所有子流程</li><li>有改动风险的流程应先走 dry-run</li><li>`docs-sync` 如无 Atlas MOC，可加 <code>--skip-moc</code></li></ul></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>Review Checklist</h2><p>审核员最少看这 3 条就够。</p></div>
+      <div class="grid2">
+        <article class="panel"><h3>文档</h3><ul><li>SKILL.md 是否说明这是 orchestrator，而不是整仓复制</li><li>输入 / 输出 / 依赖边界是否清楚</li><li>是否提供不改 vault 的验证命令</li></ul></article>
+        <article class="panel"><h3>执行</h3><ul><li><code>python3 main.py list</code> 是否正常</li><li><code>python3 main.py check</code> 是否能给出 config / mapping 结果</li><li>guide 页面是否能让非作者一眼看懂</li></ul></article>
+      </div>
+    </section>
+
+    <div class="footer">Open locally: <code>/Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/obsidian-note-hub/guide.html</code></div>
+  </div>
+</body>
+</html>

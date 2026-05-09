@@ -1,0 +1,14 @@
+.env
+.venv/
+__pycache__/
+
+# Local inputs (keep raw data out of git by default)
+reports/
+assets/
+
+# Local outputs
+out/
+
+# Local publish worktree
+.publish-worktree/
+.publish-repo/

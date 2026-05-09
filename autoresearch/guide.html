@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>autoresearch Guide</title>
+  <style>
+    :root{
+      --bg:#0f1021;
+      --bg2:#1b1f3b;
+      --panel:#f8fafc;
+      --panel2:#ede9fe;
+      --ink:#1f2340;
+      --muted:#5c6283;
+      --line:#d6d3f1;
+      --violet:#7c3aed;
+      --cyan:#06b6d4;
+      --green:#16a34a;
+      --shadow:0 24px 56px rgba(15,16,33,.26);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"IBM Plex Sans","Segoe UI",sans-serif;color:#f8fafc;background:radial-gradient(circle at top right, rgba(124,58,237,.18), transparent 22%),linear-gradient(180deg,#09090f,var(--bg),var(--bg2))}
+    code,pre,.pill{font-family:"JetBrains Mono",Consolas,monospace}
+    .wrap{width:min(1160px,calc(100% - 24px));margin:0 auto;padding:28px 0 56px}
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;padding:28px;border-radius:30px;background:linear-gradient(135deg,rgba(15,23,42,.96),rgba(31,35,64,.92));border:1px solid rgba(148,163,184,.18);box-shadow:var(--shadow)}
+    .eyebrow{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(124,58,237,.14);color:#ddd6fe;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+    h1{margin:14px 0 10px;font-size:clamp(38px,6vw,62px);line-height:.95;letter-spacing:-.04em}
+    .hero p{margin:0;color:#d8dcf5;line-height:1.7;font-size:17px}
+    .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .pill{padding:10px 14px;border-radius:999px;border:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.54);font-size:12px;color:#eef2ff}
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .stat{padding:18px;border-radius:20px;background:rgba(248,250,252,.08);border:1px solid rgba(148,163,184,.16)}
+    .stat .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#a5b4fc}
+    .stat .v{margin-top:8px;font-size:30px;font-weight:800}
+    .stat .n{margin-top:8px;color:#d8dcf5;font-size:13px;line-height:1.55}
+    .section{margin-top:20px;padding:24px;border-radius:22px;background:var(--panel);color:var(--ink);box-shadow:var(--shadow)}
+    .header{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+    .header h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1}
+    .header p{margin:0;max-width:48ch;color:var(--muted);line-height:1.65}
+    .grid3,.grid2{display:grid;gap:12px}
+    .grid3{grid-template-columns:repeat(3,1fr)}
+    .grid2{grid-template-columns:repeat(2,1fr)}
+    .card,.panel{padding:18px;border-radius:18px;border:1px solid var(--line)}
+    .card{background:linear-gradient(180deg,#fff,var(--panel2))}
+    .panel{background:#f4f2ff}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(124,58,237,.12);color:var(--violet);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .card h3,.panel h3{margin:10px 0 8px;font-size:22px}
+    pre{margin:0;padding:16px;border-radius:16px;background:#020617;color:#dcfce7;overflow-x:auto;line-height:1.55;font-size:13px}
+    ul{margin:0;padding-left:18px}
+    li{margin:8px 0;line-height:1.6}
+    .footer{margin-top:18px;text-align:center;color:#a5b4fc;font-size:14px}
+    @media (max-width:980px){.hero,.grid3,.grid2{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.wrap{width:min(100% - 16px,1160px)}.hero,.section{padding:18px;border-radius:20px}.stats{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Phase 2 Skill Production Line</div>
+        <h1>autoresearch</h1>
+        <p>把“自动迭代优化 skill”的方法论先稳定成一个研究循环脚手架。它现在做的是：初始化工作区、固定 checklist、记录 baseline、打分、写 changelog，为以后更自动化的版本留证据链。</p>
+        <div class="pills">
+          <span class="pill">Input: skill + checklist</span>
+          <span class="pill">Output: research workspace</span>
+          <span class="pill">Commands: <code>init</code> / <code>score</code> / <code>log-iteration</code></span>
+          <span class="pill">Best fit: skill QA loop</span>
+        </div>
+      </div>
+      <div class="stats">
+        <article class="stat"><div class="k">Checklist Size</div><div class="v">3-6</div><div class="n">用 yes/no 问题，不要模糊打分。</div></article>
+        <article class="stat"><div class="k">Loop Rule</div><div class="v">One Change</div><div class="n">每轮只改一个点，才知道到底是什么起作用。</div></article>
+        <article class="stat"><div class="k">Core Artifact</div><div class="v">CHANGELOG</div><div class="n">最值钱的是保留下来的“什么有效、什么无效”。</div></article>
+        <article class="stat"><div class="k">Current Scope</div><div class="v">Scaffold</div><div class="n">先做稳定研究循环，不假装已经有全自动 agent 引擎。</div></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>How To Use</h2><p>先建 workspace，再打分，再记录变更。这样后续 agent 才能接着干。</p></div>
+      <div class="grid2">
+        <div class="panel"><h3>初始化工作区</h3><pre>python3 main.py init --root /tmp/autoresearch-demo --skill-name "landing-page-skill" --author Developer_Lead --questions "标题是否具体?|是否没有 buzzwords?|CTA 是否具体?"</pre></div>
+        <div class="panel"><h3>打分与记录</h3><pre>python3 main.py score --skill-name "landing-page-skill" --answers y,n,y
+python3 main.py log-iteration --root /tmp/autoresearch-demo --iteration iter-01 --change "Add explicit headline rule" --before 56 --after 72 --keep</pre></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>Review Checklist</h2><p>审核员最少看这 3 条就够。</p></div>
+      <div class="grid2">
+        <article class="panel"><h3>定位</h3><ul><li>是否清楚说明这是 research loop scaffold，而不是全自动 optimizer</li><li>是否把 checklist / baseline / changelog 三件事讲清楚</li></ul></article>
+        <article class="panel"><h3>执行</h3><ul><li><code>score</code> 是否能输出结构化分数</li><li><code>init</code> 是否能建 workspace</li><li><code>log-iteration</code> 是否能把 keep/revert 结果写入 changelog</li></ul></article>
+      </div>
+    </section>
+
+    <div class="footer">Open locally: <code>/Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/autoresearch/guide.html</code></div>
+  </div>
+</body>
+</html>

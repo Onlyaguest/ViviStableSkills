@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>data-showcase-site Guide</title>
+  <style>
+    :root {
+      --bg:#07111f;
+      --bg2:#0f1c31;
+      --card:#f8fafc;
+      --card2:#dbeafe;
+      --ink:#102a43;
+      --soft:#486581;
+      --line:#bcccdc;
+      --cyan:#38bdf8;
+      --green:#22c55e;
+      --amber:#f59e0b;
+      --shadow:0 24px 56px rgba(2,12,27,.22);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"IBM Plex Sans","Segoe UI",sans-serif;
+      background:radial-gradient(circle at top left, rgba(56,189,248,.16), transparent 24%),linear-gradient(180deg,#020617,#07111f 45%,#0f1c31);
+      color:#f8fafc;
+    }
+    code,pre,.pill{font-family:"JetBrains Mono",Consolas,monospace}
+    .wrap{width:min(1160px,calc(100% - 24px));margin:0 auto;padding:26px 0 56px}
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;padding:28px;border-radius:30px;background:linear-gradient(135deg,rgba(15,23,42,.96),rgba(17,24,39,.9));border:1px solid rgba(148,163,184,.18);box-shadow:var(--shadow)}
+    .eyebrow{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(56,189,248,.12);color:#bae6fd;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+    h1{margin:0;font-size:clamp(38px,6vw,64px);line-height:.95;letter-spacing:-.04em}
+    .hero p{color:#cbd5e1;line-height:1.65;font-size:17px;max-width:58ch}
+    .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .pill{padding:10px 14px;border-radius:999px;border:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.54);font-size:12px;color:#e2e8f0}
+    .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .metric{padding:18px;border-radius:20px;background:rgba(248,250,252,.08);border:1px solid rgba(148,163,184,.16)}
+    .metric .label{color:#94a3b8;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+    .metric .value{margin-top:8px;font-size:30px;font-weight:800}
+    .metric .note{margin-top:8px;color:#cbd5e1;font-size:13px;line-height:1.55}
+    .section{margin-top:20px;padding:24px;border-radius:22px;background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+    .header{display:flex;justify-content:space-between;gap:16px;align-items:end;flex-wrap:wrap;margin-bottom:16px}
+    .header h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1;letter-spacing:-.03em}
+    .header p{margin:0;max-width:46ch;line-height:1.65;color:var(--soft)}
+    .grid3,.two,.checks{display:grid;gap:12px}
+    .grid3{grid-template-columns:repeat(3,1fr)}
+    .two,.checks{grid-template-columns:repeat(2,1fr)}
+    .card{padding:18px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,#fff,var(--card2))}
+    .card h3{margin:10px 0 8px;font-size:22px}
+    .kicker{display:inline-block;padding:7px 11px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(16,42,67,.08)}
+    .panel{padding:20px;border-radius:18px;border:1px solid var(--line);background:#e8eef5}
+    .panel.dark{background:#020617;color:#e2e8f0;border-color:#1e293b}
+    .panel h3{margin:0 0 12px;font-size:22px}
+    pre{margin:0;padding:16px;border-radius:16px;background:#020617;color:#dcfce7;overflow-x:auto;line-height:1.55;font-size:13px}
+    ul{margin:0;padding-left:18px}
+    li{margin:8px 0;line-height:1.6}
+    .footer{margin-top:18px;text-align:center;color:#94a3b8;font-size:14px}
+    @media (max-width:980px){.hero,.grid3,.two,.checks{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.wrap{width:min(100% - 16px,1160px)}.hero,.section{padding:18px;border-radius:20px}.metrics{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Phase 1 Graduation Template</div>
+        <h1>data-showcase-site</h1>
+        <p>把“已经拿到的数据”打包成可读、可交付、可发布的静态站点。它不是重分析工具，而是一个面向人看的报告站点生成器。</p>
+        <div class="pills">
+          <span class="pill">Input: CSV / JSON / MD / HTML</span>
+          <span class="pill">Output: Static report site</span>
+          <span class="pill">Validation: <code>build --use-examples</code></span>
+          <span class="pill">Optional: Publish</span>
+        </div>
+      </div>
+      <div class="metrics">
+        <article class="metric"><div class="label">Skill Boundary</div><div class="value">Clear</div><div class="note">已有数据 -> 报告站点，不做重型 BI。</div></article>
+        <article class="metric"><div class="label">Validation</div><div class="value">Examples</div><div class="note">内置 demo 报告和图片，审核时不依赖外部数据目录。</div></article>
+        <article class="metric"><div class="label">Delivery</div><div class="value">Human-Readable</div><div class="note">最终交付的是能直接打开的静态页面。</div></article>
+        <article class="metric"><div class="label">Phase 1 Fit</div><div class="value">Strong</div><div class="note">CC 和 Codex 两边都证明有需求，适合继续毕业。</div></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>What Changed</h2><p>这轮稳定化的重点，是把“可用脚本”变成“可审核的稳定 skill”。</p></div>
+      <div class="grid3">
+        <article class="card"><div class="kicker">01</div><h3>统一定位</h3><p>定义成“静态报告站点生成器”，不是泛化的数据分析平台。</p></article>
+        <article class="card"><div class="kicker">02</div><h3>补内置示例</h3><p>补齐 `examples/reports/demo.json` 和 `examples/assets/demo.svg`，让 `--use-examples` 真正可跑。</p></article>
+        <article class="card"><div class="kicker">03</div><h3>补视觉导览</h3><p>给审核和交接的人一个一眼能看懂的 guide 页面。</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>How To Use</h2><p>先跑例子，再接真实数据。这样审核最稳，也最容易排除环境问题。</p></div>
+      <div class="two">
+        <div class="panel dark"><h3>最小验证命令</h3><pre>cd /Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/data-showcase-site
+python3 main.py build --use-examples</pre></div>
+        <div class="panel dark"><h3>真实构建命令</h3><pre>cd /Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/data-showcase-site
+python3 main.py build --reports /absolute/path/to/reports --out out/site</pre></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>Input / Output</h2><p>审核只要看边界是否清楚，不需要先看所有实现细节。</p></div>
+      <div class="checks">
+        <article class="panel"><h3>Input</h3><ul><li>CSV / TSV</li><li>JSON 报告</li><li>Markdown / HTML 现成内容</li><li>可选图片资源</li></ul></article>
+        <article class="panel"><h3>Output</h3><ul><li>`out/site/index.html`</li><li>每个报告对应 `r/<slug>/index.html`</li><li>可选发布到 branch 或独立 repo</li></ul></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>Review Checklist</h2><p>审核员最少看这 3 条就够。</p></div>
+      <div class="checks">
+        <article class="panel"><h3>文档</h3><ul><li>SKILL.md 是否准确描述“已有数据 -> 静态站点”</li><li>输入/输出边界是否明确</li><li>最小验证命令是否简洁可执行</li></ul></article>
+        <article class="panel"><h3>执行</h3><ul><li>`python3 main.py build --use-examples` 是否能生成站点</li><li>示例页面是否能打开</li><li>guide 页面是否把使用方式说明清楚</li></ul></article>
+      </div>
+    </section>
+
+    <div class="footer">Open locally: <code>/Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/data-showcase-site/guide.html</code></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>spec-workflow Guide</title>
+  <style>
+    :root{
+      --bg:#07131e;
+      --bg2:#10253a;
+      --panel:#f8fbff;
+      --panel2:#dfeffc;
+      --ink:#0f2940;
+      --muted:#4b647b;
+      --line:#bfd4e8;
+      --cyan:#0891b2;
+      --amber:#f59e0b;
+      --green:#16a34a;
+      --shadow:0 24px 56px rgba(2,12,27,.22);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"IBM Plex Sans","Segoe UI",sans-serif;color:#f8fafc;background:radial-gradient(circle at top right, rgba(8,145,178,.16), transparent 24%),linear-gradient(180deg,#020617,var(--bg),var(--bg2))}
+    code,pre,.pill{font-family:"JetBrains Mono",Consolas,monospace}
+    .wrap{width:min(1160px,calc(100% - 24px));margin:0 auto;padding:28px 0 56px}
+    .hero{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;padding:28px;border-radius:30px;background:linear-gradient(135deg,rgba(15,23,42,.96),rgba(17,24,39,.88));border:1px solid rgba(148,163,184,.18);box-shadow:var(--shadow)}
+    .eyebrow{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(8,145,178,.12);color:#a5f3fc;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+    h1{margin:14px 0 10px;font-size:clamp(38px,6vw,62px);line-height:.95;letter-spacing:-.04em}
+    .hero p{margin:0;color:#cbd5e1;line-height:1.7;font-size:17px}
+    .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .pill{padding:10px 14px;border-radius:999px;border:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.54);font-size:12px;color:#e2e8f0}
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .stat{padding:18px;border-radius:20px;background:rgba(248,250,252,.08);border:1px solid rgba(148,163,184,.16)}
+    .stat .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8}
+    .stat .v{margin-top:8px;font-size:30px;font-weight:800}
+    .stat .n{margin-top:8px;color:#cbd5e1;font-size:13px;line-height:1.55}
+    .section{margin-top:20px;padding:24px;border-radius:22px;background:var(--panel);color:var(--ink);box-shadow:var(--shadow)}
+    .header{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+    .header h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1}
+    .header p{margin:0;max-width:48ch;color:var(--muted);line-height:1.65}
+    .grid3,.grid2{display:grid;gap:12px}
+    .grid3{grid-template-columns:repeat(3,1fr)}
+    .grid2{grid-template-columns:repeat(2,1fr)}
+    .card,.panel{padding:18px;border-radius:18px;border:1px solid var(--line)}
+    .card{background:linear-gradient(180deg,#fff,var(--panel2))}
+    .panel{background:#eef6ff}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(8,145,178,.12);color:var(--cyan);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .card h3,.panel h3{margin:10px 0 8px;font-size:22px}
+    pre{margin:0;padding:16px;border-radius:16px;background:#020617;color:#dcfce7;overflow-x:auto;line-height:1.55;font-size:13px}
+    ul{margin:0;padding-left:18px}
+    li{margin:8px 0;line-height:1.6}
+    .footer{margin-top:18px;text-align:center;color:#94a3b8;font-size:14px}
+    @media (max-width:980px){.hero,.grid3,.grid2{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.wrap{width:min(100% - 16px,1160px)}.hero,.section{padding:18px;border-radius:20px}.stats{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Phase 2 Skill Production Line</div>
+        <h1>spec-workflow</h1>
+        <p>把隐藏在 workspace 里的 `.spec-workflow` 变成公开、可初始化、可复用的稳定 skill。它的目标是让项目从产品意图到 requirements / design / tasks 有一个固定落点。</p>
+        <div class="pills">
+          <span class="pill">Input: project root</span>
+          <span class="pill">Output: .spec-workflow scaffold</span>
+          <span class="pill">Commands: <code>init</code> + <code>new-spec</code></span>
+          <span class="pill">Best fit: spec-first work</span>
+        </div>
+      </div>
+      <div class="stats">
+        <article class="stat"><div class="k">Templates</div><div class="v">6</div><div class="n">requirements / design / tasks / product / tech / structure</div></article>
+        <article class="stat"><div class="k">Directories</div><div class="v">6</div><div class="n">approvals / archive / specs / steering / templates / user-templates</div></article>
+        <article class="stat"><div class="k">Key Win</div><div class="v">Visible</div><div class="n">不再手抄隐藏目录，直接用稳定命令初始化。</div></article>
+        <article class="stat"><div class="k">Override</div><div class="v">Supported</div><div class="n">后续可以用 `user-templates/` 覆盖默认模板。</div></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>What Changed</h2><p>这次稳定化的重点，不是复制 `.spec-workflow`，而是把它包装成对项目更友好的脚手架。</p></div>
+      <div class="grid3">
+        <article class="card"><div class="tag">01</div><h3>打包模板</h3><p>把 6 类默认模板收进 skill 自带的 bundle。</p></article>
+        <article class="card"><div class="tag">02</div><h3>公开入口</h3><p>新增 `check`、`init`、`new-spec` 三个稳定命令。</p></article>
+        <article class="card"><div class="tag">03</div><h3>保留 override</h3><p>初始化时自动带上 `user-templates/README.md`，后面可按项目覆盖模板。</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>How To Use</h2><p>先初始化，再建 feature spec。不要直接跳到写 tasks。</p></div>
+      <div class="grid2">
+        <div class="panel"><h3>初始化项目</h3><pre>cd /Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/spec-workflow
+python3 main.py init --root /tmp/spec-demo --project-name "Spec Demo" --author Developer_Lead</pre></div>
+        <div class="panel"><h3>创建功能规格</h3><pre>cd /Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/spec-workflow
+python3 main.py new-spec --root /tmp/spec-demo --name "dashboard sync" --author Developer_Lead</pre></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>Review Checklist</h2><p>审核员最少看这 3 条就够。</p></div>
+      <div class="grid2">
+        <article class="panel"><h3>文档</h3><ul><li>SKILL.md 是否说明这是 spec-first scaffold</li><li>输入 / 输出 / 目录结构边界是否清楚</li><li>是否讲清 `user-templates` override 机制</li></ul></article>
+        <article class="panel"><h3>执行</h3><ul><li><code>python3 main.py check</code> 是否通过</li><li><code>init</code> 是否能产出 `.spec-workflow` 目录</li><li><code>new-spec</code> 是否能产出 requirements / design / tasks</li></ul></article>
+      </div>
+    </section>
+
+    <div class="footer">Open locally: <code>/Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/spec-workflow/guide.html</code></div>
+  </div>
+</body>
+</html>

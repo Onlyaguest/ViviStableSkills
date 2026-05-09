@@ -1,0 +1,30 @@
+# Golden Dataset (Baseline) - GPT-4o (Temp=0.0)
+
+- input: "18:43 傻瓜傻瓜我终于把我这个打通了现在相当于从Siri到Notes记事本到Gemini Google doc然后Google doc自动的就OK了现在我们要做就是每天晚上跟见面来说说晚安"
+  expected: "【🛠️ 系统/调试】 18:43 成功实现从Siri到Notes记事本，再到Gemini Google Doc的自动化流程。 #Automation #Workflow #GoogleDoc"
+
+- input: "来来来，我来做了以下mac的版本"
+  expected: "【🛠️ 系统/调试】 完成了Mac版本的开发。 #Mac #Development"
+
+- input: "19:34 最后一下，mac端的测试，阿门"
+  expected: "【🛠️ 系统/调试】 19:34 最后一下，mac端的测试。 #Mac #Test"
+
+- input: "22:30 deep agent是应该接在后面的重要的东西"
+  expected: "【🧠 灵感/Project】 22:30 deep agent是应该接在后面的重要的东西。 #DeepAgent #Idea"
+
+- input: "22:56 聊了新产品的形态和那可以起重点还是解决输入的问题然后只需要一个入口然后后面可以考虑App在什么过程"
+  expected: "【🧠 灵感/Project】 22:56 讨论新产品的形态，重点在于解决输入问题，并考虑只需一个入口，后续再考虑App的开发过程。 #ProductDesign #InputSolution"
+
+- input: "23:19 今天步数走到 11400 步啦，锻炼应该是够了。然后呢现在刚刚到家。然后今天晚餐吃的是泰餐，有虾肉、冬阴功，然后鸡肉，还蛮好吃的，还有虾片。"
+  expected: "【🥗 饮食/健康】 23:19 今天步数走到 11400 步，锻炼应该够了。晚餐吃了泰餐，有虾肉、冬阴功、鸡肉和虾片，还蛮好吃的。 #Exercise #ThaiFood #HealthyEating"
+
+- input: "00:00 Hey, quick test."
+  expected: "【🛠️ 系统/调试】 00:00 Quick test. #Test #Debugging"
+
+# The "Long Rambling" Case
+- input: "00:36 嗯，这种应该是可以随便发言的，我也不知道能说多久，反正就尽可能地说吧。然后我不知道这个 long limitation 是多少，但是清处一下发言，最后再处一下结束。我不知道是不是开一个足够长的会议，这个事也能这么干。这种方式，嗯，我感觉也很适合，就是在开会的时候，但它又占用了手机的屏幕，对吧？那所以说电脑它还能做，所以这个场景是真的合适了吗？还是说一句话那种？我也不是很确定，但是如果这种的可以，也可以作为一个，就是呃跟飞书呃会议一样，好，我我直接。用来写我的文章，这也是件蛮好的事情，毕竟对我来说我去录个会议我还要把 STT 弄进来，但是如果我自己直接用这种方式，然后其实他用的也是飞书的，我不知道他调不调，但是，呃。准确度应该其实都还是跟输入法相关的吧？我就不知道输入法的长度有没有做 limitation，如果没有的话，它不是很香吗？嗯，我可以下次在开会的时候试着测一下这个时长，反正两边都录嘛，对吧？一边这个一边手机，明天呢就可以试起来。呃，还是很有挑战性的。那像这种的我直接这么发送是不是可能有点不合适？我可能专门做一个会议处理的。这样一个快捷指令哈，如果我需要的话，当然这个我得对比一下好不好用，如果不好用，我还是用我的古法会比较好。而不是单纯的 STT，对吧？"
+  expected: "【🧠 灵感/Project】 00:36 讨论语音转文字在长会议记录中的可行性，以及是否需要“输入法限制”等细节。考虑在会议中使用飞书进行录音，并对比不同设备的效果。 #Meeting #Idea #STT #Feishu"
+
+# User Reported Regression - Tag Failure
+- input: "11:21 我现在正在测试通过我的新提示词版本。这样能够比较优雅地把我的碎碎念，然后比较规整地打好 tag。 然后我把 key 从 Gemini 换成了 GPT-4O。"
+  expected: "【🛠️ 系统/调试】 11:21 测试新提示词版本，以优雅地整理碎碎念并打好标签。将 key 从 Gemini 换成了 GPT-4O。 #Testing #PromptEngineering #GPT4O"

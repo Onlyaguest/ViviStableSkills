@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>i18n-kit Guide</title>
+  <style>
+    :root {
+      --bg:#071018;
+      --bg2:#0f172a;
+      --card:#f8fafc;
+      --card2:#e0f2fe;
+      --ink:#0f172a;
+      --soft:#475569;
+      --line:#cbd5e1;
+      --blue:#38bdf8;
+      --green:#22c55e;
+      --amber:#f59e0b;
+      --shadow:0 24px 56px rgba(2,12,27,.22);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"IBM Plex Sans","Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(56,189,248,.16),transparent 24%),linear-gradient(180deg,#020617,#071018 45%,#0f172a);color:#f8fafc}
+    code,pre,.pill{font-family:"JetBrains Mono",Consolas,monospace}
+    .wrap{width:min(1160px,calc(100% - 24px));margin:0 auto;padding:26px 0 56px}
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;padding:28px;border-radius:30px;background:linear-gradient(135deg,rgba(15,23,42,.96),rgba(17,24,39,.9));border:1px solid rgba(148,163,184,.18);box-shadow:var(--shadow)}
+    .eyebrow{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(56,189,248,.12);color:#bae6fd;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+    h1{margin:0;font-size:clamp(38px,6vw,64px);line-height:.95;letter-spacing:-.04em}
+    .hero p{color:#cbd5e1;line-height:1.65;font-size:17px;max-width:58ch}
+    .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .pill{padding:10px 14px;border-radius:999px;border:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.54);font-size:12px;color:#e2e8f0}
+    .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .metric{padding:18px;border-radius:20px;background:rgba(248,250,252,.08);border:1px solid rgba(148,163,184,.16)}
+    .label{color:#94a3b8;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+    .value{margin-top:8px;font-size:30px;font-weight:800}
+    .note{margin-top:8px;color:#cbd5e1;font-size:13px;line-height:1.55}
+    .section{margin-top:20px;padding:24px;border-radius:22px;background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+    .header{display:flex;justify-content:space-between;gap:16px;align-items:end;flex-wrap:wrap;margin-bottom:16px}
+    .header h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1;letter-spacing:-.03em}
+    .header p{margin:0;max-width:46ch;line-height:1.65;color:var(--soft)}
+    .grid3,.two,.checks{display:grid;gap:12px}
+    .grid3{grid-template-columns:repeat(3,1fr)}
+    .two,.checks{grid-template-columns:repeat(2,1fr)}
+    .card{padding:18px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,#fff,var(--card2))}
+    .card h3{margin:10px 0 8px;font-size:22px}
+    .kicker{display:inline-block;padding:7px 11px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(15,23,42,.08)}
+    .panel{padding:20px;border-radius:18px;border:1px solid var(--line);background:#eef6ff}
+    .panel.dark{background:#020617;color:#e2e8f0;border-color:#1e293b}
+    .panel h3{margin:0 0 12px;font-size:22px}
+    pre{margin:0;padding:16px;border-radius:16px;background:#020617;color:#dcfce7;overflow-x:auto;line-height:1.55;font-size:13px}
+    ul{margin:0;padding-left:18px}
+    li{margin:8px 0;line-height:1.6}
+    .footer{margin-top:18px;text-align:center;color:#94a3b8;font-size:14px}
+    @media (max-width:980px){.hero,.grid3,.two,.checks{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.wrap{width:min(100% - 16px,1160px)}.hero,.section{padding:18px;border-radius:20px}.metrics{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Phase 1 Graduation Template</div>
+        <h1>i18n-kit</h1>
+        <p>面向报告页和轻量静态项目的离线优先国际化工具。核心价值不是“翻译很多语言”，而是先把文案 token 化、把字典落盘、把切换器做成完全离线可用的交付物。</p>
+        <div class="pills">
+          <span class="pill">extract</span>
+          <span class="pill">apply</span>
+          <span class="pill">embed-switch</span>
+          <span class="pill">AI translation optional</span>
+        </div>
+      </div>
+      <div class="metrics">
+        <article class="metric"><div class="label">Minimum Validation</div><div class="value">No API</div><div class="note">审核先跑 `extract --dry-run`，不依赖任何翻译服务。</div></article>
+        <article class="metric"><div class="label">Best Fit</div><div class="value">Reports / Small Sites</div><div class="note">适合静态 HTML、报告页、小型前端，不强推大型框架方案。</div></article>
+        <article class="metric"><div class="label">Output</div><div class="value">Offline</div><div class="note">可生成 token 化源码、字典、翻译后的目录、单文件语言切换页。</div></article>
+        <article class="metric"><div class="label">Phase 1 Goal</div><div class="value">Unified Entry</div><div class="note">把 `i18n-kit` 和 `i18n-translator` 这条能力族收敛成一个统一入口。</div></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>What Changed</h2><p>这轮不是再造一个翻译器，而是把现有能力族收敛成一个稳定、可审、可演示的 skill 包。</p></div>
+      <div class="grid3">
+        <article class="card"><div class="kicker">01</div><h3>统一入口</h3><p>把离线 token 化、apply、embed-switch 和 AI 翻译脚本收在同一个 `i18n-kit` 目录。</p></article>
+        <article class="card"><div class="kicker">02</div><h3>示例可跑</h3><p>补了 `examples/site/demo.html`，让审核时不需要再准备自己的项目。</p></article>
+        <article class="card"><div class="kicker">03</div><h3>审核友好</h3><p>把最小验证锁定在无 API 的离线路径，避免被翻译 key 卡住。</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>Two Modes</h2><p>先验证离线路径，再决定要不要接 AI 翻译。</p></div>
+      <div class="two">
+        <div class="panel dark"><h3>模式 A: 离线验证</h3><pre>cd /Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/i18n-kit
+python3 main.py --dry-run extract --root examples/site --lang zh-CN --ext .html</pre></div>
+        <div class="panel dark"><h3>模式 B: AI 翻译</h3><pre>cd /Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/i18n-kit
+cp .env.example .env
+python3 translate.py --root /path/to/project --targets "en-US,ja-JP"</pre></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>Workflow</h2><p>这是一个先抽取、再翻译、再应用、最后切换的四步流。</p></div>
+      <div class="checks">
+        <article class="panel"><h3>1. Extract</h3><ul><li>扫描中文文案</li><li>生成 `i18n/zh-CN.json`</li><li>可选把源码替换成 token</li></ul></article>
+        <article class="panel"><h3>2. Translate</h3><ul><li>手工翻译 JSON</li><li>或用 `translate.py` 调 AI 生成目标语言</li></ul></article>
+        <article class="panel"><h3>3. Apply</h3><ul><li>输出目标语言目录</li><li>保留原项目不变</li></ul></article>
+        <article class="panel"><h3>4. Embed Switch</h3><ul><li>给单个 HTML 注入离线切换器</li><li>适合报告页和交付页</li></ul></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header"><h2>Review Checklist</h2><p>审核员只需要看这 3 条。</p></div>
+      <div class="checks">
+        <article class="panel"><h3>文档</h3><ul><li>SKILL.md 是否说清“离线优先 i18n”定位</li><li>输入/输出边界是否明确</li><li>是否强调先 `--dry-run` 再 `--write`</li></ul></article>
+        <article class="panel"><h3>执行</h3><ul><li>`extract --dry-run` 是否能跑通</li><li>示例 HTML 是否足够演示</li><li>`main.py` / `translate.py` 是否可编译</li></ul></article>
+      </div>
+    </section>
+
+    <div class="footer">Open locally: <code>/Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/i18n-kit/guide.html</code></div>
+  </div>
+</body>
+</html>

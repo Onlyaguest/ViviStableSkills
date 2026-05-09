@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>tool-arch-diagram-generator Guide</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-alt: #111827;
+      --panel: #f8fafc;
+      --panel-alt: #dbe4f0;
+      --ink: #0f172a;
+      --ink-soft: #334155;
+      --line: #1e293b;
+      --accent: #22c55e;
+      --accent-2: #38bdf8;
+      --accent-3: #f97316;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 24%),
+        radial-gradient(circle at top right, rgba(249, 115, 22, 0.18), transparent 20%),
+        linear-gradient(180deg, #020617 0%, #0f172a 44%, #111827 100%);
+      color: #f8fafc;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      padding: 28px;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(30, 41, 59, 0.96), rgba(15, 23, 42, 0.88)),
+        linear-gradient(90deg, rgba(34, 197, 94, 0.12), rgba(56, 189, 248, 0.12));
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -50px;
+      top: -40px;
+      width: 220px;
+      height: 220px;
+      background:
+        linear-gradient(135deg, rgba(34, 197, 94, 0.85), rgba(56, 189, 248, 0.75));
+      border-radius: 28px;
+      transform: rotate(16deg);
+      opacity: 0.18;
+    }
+
+    .eyebrow,
+    .chip,
+    code,
+    pre,
+    .metric-label {
+      font-family: "JetBrains Mono", "SFMono-Regular", "Consolas", monospace;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.16);
+      color: #bbf7d0;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(36px, 6vw, 62px);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      max-width: 58ch;
+      color: #cbd5e1;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(15, 23, 42, 0.6);
+      color: #e2e8f0;
+      font-size: 12px;
+    }
+
+    .hero-card {
+      align-self: stretch;
+      display: grid;
+      gap: 14px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(248, 250, 252, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      backdrop-filter: blur(10px);
+    }
+
+    .metric-label {
+      color: #94a3b8;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .metric-value {
+      margin-top: 8px;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .metric-note {
+      margin-top: 8px;
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .section {
+      margin-top: 20px;
+      padding: 24px;
+      border-radius: var(--radius);
+      background: var(--panel);
+      color: var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .section-header p {
+      margin: 0;
+      max-width: 44ch;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    .status-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .status-card {
+      padding: 18px;
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, #ffffff, var(--panel-alt));
+      border: 1px solid #cbd5e1;
+    }
+
+    .status-card strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 20px;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .step {
+      position: relative;
+      padding: 20px;
+      border-radius: 20px;
+      background: #e2e8f0;
+      overflow: hidden;
+    }
+
+    .step:nth-child(1) { background: #dbeafe; }
+    .step:nth-child(2) { background: #dcfce7; }
+    .step:nth-child(3) { background: #ffedd5; }
+
+    .step-index {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(15, 23, 42, 0.08);
+    }
+
+    .step h3 {
+      margin: 14px 0 8px;
+      font-size: 24px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 14px;
+    }
+
+    .panel {
+      padding: 20px;
+      border-radius: 20px;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+    }
+
+    .panel.dark {
+      background: #0f172a;
+      color: #f8fafc;
+      border-color: #1e293b;
+    }
+
+    .panel h3 {
+      margin: 0 0 12px;
+      font-size: 21px;
+    }
+
+    .panel p,
+    .panel li {
+      line-height: 1.6;
+    }
+
+    .card-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-card {
+      padding: 16px;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #475569;
+    }
+
+    pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      border-radius: 18px;
+      background: #020617;
+      color: #d4fce4;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .mermaid-wrap {
+      padding: 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff, #e2e8f0);
+      overflow-x: auto;
+    }
+
+    .filemap {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .filemap .mini-card {
+      background: #f8fafc;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: #94a3b8;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 960px) {
+      .hero,
+      .two-col,
+      .workflow,
+      .status-strip,
+      .filemap {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 18px, 1160px);
+      }
+
+      .hero,
+      .section {
+        padding: 18px;
+        border-radius: 22px;
+      }
+
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Phase 1 Graduation Template</div>
+        <h1>tool-arch-diagram-generator</h1>
+        <p>这不是一份普通 README，而是一张可直接给人看的稳定化结果页。它同时说明了这次毕业做了什么、这个 skill 什么时候触发、怎么跑最小验证，以及最终交付物长什么样。</p>
+        <div class="hero-actions">
+          <span class="chip">Input: Markdown + Mermaid</span>
+          <span class="chip">Output: Offline HTML</span>
+          <span class="chip">Runtime: Python 3</span>
+          <span class="chip">No CDN</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="metric-grid">
+          <article class="metric">
+            <div class="metric-label">Stabilization</div>
+            <div class="metric-value">Done</div>
+            <div class="metric-note">已进入 <code>MyStableSkills</code>，不是项目内部散落脚本。</div>
+          </article>
+          <article class="metric">
+            <div class="metric-label">Validation</div>
+            <div class="metric-value">2 / 2</div>
+            <div class="metric-note">`--dry-run` 与完整 HTML 生成都已通过。</div>
+          </article>
+          <article class="metric">
+            <div class="metric-label">Skill Spec</div>
+            <div class="metric-value">77 lines</div>
+            <div class="metric-note">触发条件、输入输出、最小命令都压进了稳定版 `SKILL.md`。</div>
+          </article>
+          <article class="metric">
+            <div class="metric-label">Reusable</div>
+            <div class="metric-value">High</div>
+            <div class="metric-note">可直接作为后续 `prompt-tuner` 等 skill 的毕业模板。</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>What Changed</h2>
+        <p>这次不是只写文档，而是把一个项目内工具真正“毕业”成稳定 skill。</p>
+      </div>
+      <div class="status-strip">
+        <article class="status-card">
+          <div class="metric-label">1. Unified Trigger</div>
+          <strong>统一触发口径</strong>
+          <div class="metric-note">“帮我画架构图”“Mermaid 转 HTML”“生成离线页面”这些话都能覆盖到。</div>
+        </article>
+        <article class="status-card">
+          <div class="metric-label">2. Stable Files</div>
+          <strong>补齐稳定交付物</strong>
+          <div class="metric-note">`SKILL.md`、`main.py`、`.env.example`、`mermaid.min.js`、`.gitignore` 全部齐。</div>
+        </article>
+        <article class="status-card">
+          <div class="metric-label">3. Ready to Use</div>
+          <strong>本地直接可跑</strong>
+          <div class="metric-note">不依赖外网，不依赖 CDN，打开本地 HTML 就能看结果。</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>How It Works</h2>
+        <p>一个三步流程，专门压缩成可交接、可复用、可审核的最小闭环。</p>
+      </div>
+      <div class="workflow">
+        <article class="step">
+          <div class="step-index">Step 01</div>
+          <h3>准备 Markdown</h3>
+          <p>把 Mermaid 放进标准 fenced code block。推荐直接用 <code>```mermaid</code>，这样解析最稳。</p>
+        </article>
+        <article class="step">
+          <div class="step-index">Step 02</div>
+          <h3>先做 Dry Run</h3>
+          <p>先确认 block 被识别，避免直接生成后才发现 Mermaid 没抓到。</p>
+        </article>
+        <article class="step">
+          <div class="step-index">Step 03</div>
+          <h3>生成离线 HTML</h3>
+          <p>脚本会把本地 <code>mermaid.min.js</code> 带进去，输出可分享的本地页面。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Usage Guide</h2>
+        <p>下面这两条命令就是“最小会用”和“最小能交付”的边界。</p>
+      </div>
+      <div class="two-col">
+        <div class="panel dark">
+          <h3>最小验证命令</h3>
+          <pre>cd /Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/tool-arch-diagram-generator
+python3 main.py --input /absolute/path/to/diagram.md --dry-run</pre>
+        </div>
+        <div class="panel dark">
+          <h3>完整生成命令</h3>
+          <pre>cd /Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/tool-arch-diagram-generator
+python3 main.py \
+  --input /absolute/path/to/diagram.md \
+  --output ./dist \
+  --title "System Architecture"</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Input / Output</h2>
+        <p>审核时只需要看边界是不是够清楚，不需要看所有代码。</p>
+      </div>
+      <div class="two-col">
+        <div class="panel">
+          <h3>Input</h3>
+          <div class="card-list">
+            <div class="mini-card">
+              <strong>Accepted</strong>
+              Markdown 文件，内部包含 Mermaid 代码块。
+            </div>
+            <div class="mini-card">
+              <strong>Preferred</strong>
+              使用 fenced ` ```mermaid ` block。
+            </div>
+            <div class="mini-card">
+              <strong>Example</strong>
+              <pre>```mermaid
+flowchart TD
+    A[Start] --> B{Check}
+```</pre>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Output</h3>
+          <div class="card-list">
+            <div class="mini-card">
+              <strong>Generated</strong>
+              默认输出到 `./dist/index.html`
+            </div>
+            <div class="mini-card">
+              <strong>Properties</strong>
+              本地可打开、无需 CDN、可交接、可分享。
+            </div>
+            <div class="mini-card">
+              <strong>Success Signal</strong>
+              终端看到：<code>OK: /path/to/output/index.html</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Rendered Example</h2>
+        <p>这不是假示意图，下面这个 Mermaid 会直接用同目录的 `mermaid.min.js` 渲染。</p>
+      </div>
+      <div class="mermaid-wrap">
+        <div class="mermaid">
+flowchart LR
+    U[User Request] --> M[Markdown with Mermaid]
+    M --> D[Dry Run]
+    D --> H[Generate Offline HTML]
+    H --> R[Review & Share]
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>File Map</h2>
+        <p>审核员不用翻整个项目，只需要认这几个文件有没有到位。</p>
+      </div>
+      <div class="filemap">
+        <div class="mini-card">
+          <strong>SKILL.md</strong>
+          触发条件、工作流、输入输出、最小验证命令。
+        </div>
+        <div class="mini-card">
+          <strong>main.py</strong>
+          核心 CLI 实现，负责检测 Mermaid block 和生成 HTML。
+        </div>
+        <div class="mini-card">
+          <strong>mermaid.min.js</strong>
+          本地渲染运行时，保证离线能力。
+        </div>
+        <div class="mini-card">
+          <strong>.env.example</strong>
+          保留 `MERMAID_JS_PATH` 配置入口。
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Review Checklist</h2>
+        <p>以后 Phase 1 的 skill 审核，也可以直接套这一套。</p>
+      </div>
+      <div class="two-col">
+        <div class="panel">
+          <h3>文档审核</h3>
+          <ul>
+            <li>触发条件是不是一句话就能判断</li>
+            <li>输入/输出边界是不是够清楚</li>
+            <li>验证命令是不是最小且可执行</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>执行审核</h3>
+          <ul>
+            <li>`--dry-run` 能识别 Mermaid block</li>
+            <li>完整命令能输出 `index.html`</li>
+            <li>结果页不依赖 CDN</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">Open locally: <code>/Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/tool-arch-diagram-generator/guide.html</code></div>
+  </div>
+
+  <script src="./mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: true, theme: "neutral" });
+  </script>
+</body>
+</html>

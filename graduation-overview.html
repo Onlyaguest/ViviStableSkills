@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Graduated Skills Overview</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --bg2:#111b2e;
+      --panel:#f8fafc;
+      --panel2:#e2e8f0;
+      --ink:#10233d;
+      --muted:#526277;
+      --line:#cbd5e1;
+      --cyan:#38bdf8;
+      --green:#22c55e;
+      --amber:#f59e0b;
+      --rose:#ef4444;
+      --navy:#1d4ed8;
+      --shadow:0 24px 56px rgba(2,12,27,.22);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"IBM Plex Sans","Segoe UI",sans-serif;
+      color:#f8fafc;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.14), transparent 22%),
+        radial-gradient(circle at top right, rgba(34,197,94,.12), transparent 20%),
+        linear-gradient(180deg,#020617,var(--bg) 40%,var(--bg2));
+    }
+    code,pre,.pill,.mini{font-family:"JetBrains Mono",Consolas,monospace}
+    a{color:inherit}
+    .wrap{width:min(1240px,calc(100% - 24px));margin:0 auto;padding:28px 0 60px}
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      padding:28px;
+      border-radius:30px;
+      background:linear-gradient(135deg,rgba(15,23,42,.96),rgba(17,24,39,.88));
+      border:1px solid rgba(148,163,184,.18);
+      box-shadow:var(--shadow);
+    }
+    .eyebrow{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(56,189,248,.12);color:#bae6fd;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+    h1{margin:14px 0 10px;font-size:clamp(38px,6vw,68px);line-height:.95;letter-spacing:-.04em}
+    .hero p{margin:0;color:#cbd5e1;line-height:1.7;font-size:17px;max-width:62ch}
+    .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .pill{padding:10px 14px;border-radius:999px;border:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.54);font-size:12px;color:#e2e8f0}
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .stat{padding:18px;border-radius:20px;background:rgba(248,250,252,.08);border:1px solid rgba(148,163,184,.16)}
+    .stat .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8}
+    .stat .v{margin-top:8px;font-size:30px;font-weight:800}
+    .stat .n{margin-top:8px;color:#cbd5e1;line-height:1.55;font-size:13px}
+    .section{margin-top:20px;padding:24px;border-radius:24px;background:var(--panel);color:var(--ink);box-shadow:var(--shadow)}
+    .header{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+    .header h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1;letter-spacing:-.03em}
+    .header p{margin:0;max-width:50ch;color:var(--muted);line-height:1.65}
+    .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .card{padding:20px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,#fff,#f4f8fc)}
+    .card-head{display:flex;justify-content:space-between;gap:10px;align-items:start}
+    .badge{display:inline-block;padding:7px 11px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .phase1{background:rgba(29,78,216,.1);color:var(--navy)}
+    .phase2{background:rgba(34,197,94,.12);color:#15803d}
+    .card h3{margin:12px 0 8px;font-size:26px;line-height:1}
+    .card p{margin:0;color:var(--muted);line-height:1.65}
+    .meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+    .mini{padding:12px;border-radius:14px;background:#eef4fb;border:1px solid #d7e3f0;font-size:12px;color:#28435c;line-height:1.55}
+    .mini strong{display:block;margin-bottom:5px;font-family:"IBM Plex Sans","Segoe UI",sans-serif;font-size:12px;color:var(--ink)}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:999px;text-decoration:none;font-size:13px;font-weight:700;border:1px solid transparent}
+    .btn.primary{background:var(--ink);color:#f8fafc}
+    .btn.secondary{background:#fff;border-color:var(--line);color:var(--ink)}
+    .next-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .next{padding:18px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,#fff,#eef4fb)}
+    .next h3{margin:10px 0 8px;font-size:22px}
+    ul{margin:0;padding-left:18px}
+    li{margin:8px 0;line-height:1.6}
+    .footer{margin-top:18px;text-align:center;color:#94a3b8;font-size:14px}
+    @media (max-width:1080px){.hero,.cards,.next-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.wrap{width:min(100% - 16px,1240px)}.hero,.section{padding:18px;border-radius:20px}.stats,.meta{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">MyStableSkills Graduation Dashboard</div>
+        <h1>Phase 1 + Phase 2<br>Graduated Skills</h1>
+        <p>这一页不是目录索引，而是毕业技能的一屏总览。每张卡都压缩了用途、触发方式、最小验证命令和 guide 入口，方便 @yuanzi、@PM_Leader、Codex、CC 用同一套口径看当前成果。</p>
+        <div class="pills">
+          <span class="pill">6 graduated this round</span>
+          <span class="pill">5 in Phase 1</span>
+          <span class="pill">1 in Phase 2</span>
+          <span class="pill">All landed in MyStableSkills</span>
+        </div>
+      </div>
+      <div class="stats">
+        <article class="stat"><div class="k">Phase 1</div><div class="v">5 / 5</div><div class="n">显性、最容易毕业的 skills 已全部完成。</div></article>
+        <article class="stat"><div class="k">Phase 2</div><div class="v">1 / 3</div><div class="n">先从最轻的技能生产线组件 `skills-filter` 开始。</div></article>
+        <article class="stat"><div class="k">Canonical Home</div><div class="v">MyStableSkills</div><div class="n">CC 与 Codex 后续都应复用这里，而不是各养一套。</div></article>
+        <article class="stat"><div class="k">Next Up</div><div class="v">spec-workflow</div><div class="n">随后是 `autoresearch`，先补技能生产线，再补更重的系统化能力。</div></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header">
+        <h2>Graduated Cards</h2>
+        <p>这些是本轮已经毕业或进入稳定库的核心 skills。每个卡片都能直接带你去相应的 `guide.html`。</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="card-head"><span class="badge phase1">Phase 1</span><span class="badge phase1">Architecture</span></div>
+          <h3>tool-arch-diagram-generator</h3>
+          <p>把 Markdown 里的 Mermaid 块渲染成离线 HTML 架构图，适合交付文档和系统方案图。</p>
+          <div class="meta">
+            <div class="mini"><strong>Trigger</strong>“帮我画架构图”、给一段 Mermaid、要离线 HTML。</div>
+            <div class="mini"><strong>Validate</strong><code>python3 main.py --input /tmp/arch.md --dry-run</code></div>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="./tool-arch-diagram-generator/guide.html">Open Guide</a>
+            <a class="btn secondary" href="./tool-arch-diagram-generator/">Open Folder</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="badge phase1">Phase 1</span><span class="badge phase1">Prompt QA</span></div>
+          <h3>prompt-tuner</h3>
+          <p>把 prompt 当代码管：`prompt.txt`、`cases.yaml`、回归测试和 `CHANGELOG` 全部串起来。</p>
+          <div class="meta">
+            <div class="mini"><strong>Trigger</strong>“优化这个 prompt”、回归测试、golden dataset、TDD for prompts。</div>
+            <div class="mini"><strong>Validate</strong><code>python3 tuner.py --check</code></div>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="./prompt-tuner/guide.html">Open Guide</a>
+            <a class="btn secondary" href="./prompt-tuner/">Open Folder</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="badge phase1">Phase 1</span><span class="badge phase1">Reports</span></div>
+          <h3>data-showcase-site</h3>
+          <p>把已有数据打包成可读、可交付、可发布的静态报告站点，不做从头分析。</p>
+          <div class="meta">
+            <div class="mini"><strong>Trigger</strong>“已有数据，想做一眼能看的报告站点”。</div>
+            <div class="mini"><strong>Validate</strong><code>python3 main.py build --use-examples</code></div>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="./data-showcase-site/guide.html">Open Guide</a>
+            <a class="btn secondary" href="./data-showcase-site/">Open Folder</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="badge phase1">Phase 1</span><span class="badge phase1">i18n</span></div>
+          <h3>i18n-kit</h3>
+          <p>离线优先的小型站点 / 报告 i18n 工作流，支持抽词、字典维护、应用翻译和本地语言切换器。</p>
+          <div class="meta">
+            <div class="mini"><strong>Trigger</strong>“帮我做中英双语”、离线切语言、报告页多语化。</div>
+            <div class="mini"><strong>Validate</strong><code>python3 main.py --dry-run extract --root examples/site --lang zh-CN --ext .html</code></div>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="./i18n-kit/guide.html">Open Guide</a>
+            <a class="btn secondary" href="./i18n-kit/">Open Folder</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="badge phase1">Phase 1</span><span class="badge phase1">Note Ops</span></div>
+          <h3>obsidian-note-hub</h3>
+          <p>一整族 Obsidian 笔记工具的统一入口型 orchestrator，给现有 `MyNotesTools` 一层稳定调度面。</p>
+          <div class="meta">
+            <div class="mini"><strong>Trigger</strong>不想手敲 10 个脚本，只想用一个入口处理 archive / merge / lint / docs-sync。</div>
+            <div class="mini"><strong>Validate</strong><code>python3 main.py list</code> + <code>python3 main.py check</code></div>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="./obsidian-note-hub/guide.html">Open Guide</a>
+            <a class="btn secondary" href="./obsidian-note-hub/">Open Folder</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><span class="badge phase2">Phase 2</span><span class="badge phase2">Gate</span></div>
+          <h3>skills-filter</h3>
+          <p>在工程时间投入之前，先用 5 个问题把 skill 想法做 build / deepen / reject 的快速门控。</p>
+          <div class="meta">
+            <div class="mini"><strong>Trigger</strong>“我想做一个 XXX skill”，但还不确定值不值得做。</div>
+            <div class="mini"><strong>Validate</strong><code>python3 main.py --example lawyer-email-assistant</code></div>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="./skills-filter/guide.html">Open Guide</a>
+            <a class="btn secondary" href="./skills-filter/">Open Folder</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="header">
+        <h2>What Is Still Missing</h2>
+        <p>显性技能已经毕业完，后面缺的主要是技能生产线本身和更重的隐性 workflow。</p>
+      </div>
+      <div class="next-grid">
+        <article class="next">
+          <span class="badge phase2">Next</span>
+          <h3>spec-workflow</h3>
+          <ul>
+            <li>把需求 -> 规格 -> 任务拆解稳定成 skill</li>
+            <li>两边 workspace 都在用，但还没产品化</li>
+          </ul>
+        </article>
+        <article class="next">
+          <span class="badge phase2">After</span>
+          <h3>autoresearch</h3>
+          <ul>
+            <li>自动改进 skill 质量的方法论</li>
+            <li>适合作为整个技能库的强化回路</li>
+          </ul>
+        </article>
+        <article class="next">
+          <span class="badge phase2">Later</span>
+          <h3>Heavy Systems</h3>
+          <ul>
+            <li>`agent-memory`</li>
+            <li>`energy-os`</li>
+            <li>`persona-router / meta-os`</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <div class="footer">Open locally: <code>/Users/yangyuan/Desktop/Codex版小工具upup/MyStableSkills/graduation-overview.html</code></div>
+  </div>
+</body>
+</html>
