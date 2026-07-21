@@ -1,0 +1,4 @@
+interface:
+  display_name: "Open in Omia"
+  short_description: "用 Omia 安静地打开、预览并审阅各类本地交付文件"
+  default_prompt: "Use $open-in-omia to open the current local deliverable in Omia for review."

@@ -23,6 +23,7 @@ Graduation dashboard: [graduation-overview.html](./graduation-overview.html)
 | [skills-filter](./skills-filter/) | Five-question filter for deciding whether a proposed new skill is worth building | all |
 | [spec-workflow](./spec-workflow/) | Scaffold a reusable `.spec-workflow` with steering docs and per-feature spec folders | all |
 | [autoresearch](./autoresearch/) | Scaffold an evidence-driven skill improvement loop with checklist scoring and iteration logs | all |
+| [open-in-omia](./open-in-omia/) | Open local review artifacts in Xiaoer Omia without changing global file associations | macOS |
 
 ## Quick Start
 
