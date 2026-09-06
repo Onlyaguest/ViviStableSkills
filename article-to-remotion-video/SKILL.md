@@ -2,7 +2,7 @@
 name: article-to-remotion-video
 description: "Turn one article, document, or long-form source into a locally runnable Remotion short video with source-grounded storytelling, reusable visuals, optional Cohub TTS narration, and STT/technical QA. Use when the user asks for 一篇文章出视频、文章转短视频、Remotion 成片、带配音的视频样片, or wants to repeat this workflow on new articles. Do not trigger for ordinary video playback, transcription-only requests, or interactive-web-only work."
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   author: Vivi
   tags: [video, remotion, article, tts, stt]
   platforms: [macos, linux]
@@ -79,6 +79,7 @@ Avoid unrelated particles, decorative motion, and generic stock imagery. A trans
 Read [references/tts-stt.md](references/tts-stt.md) before any Cohub generation.
 
 - Use Cohub TTS, not STT, to create narration.
+- For first-time users, the reference provides the maintainer's Cohub registration invitation and recommended TTS Space invitation. Present them as optional onboarding links; never open or join automatically.
 - Split narration by scene; keep each Qwen voice-design request under 200 Unicode characters.
 - Use the same voice description for every segment.
 - Do not claim to clone the author unless the user supplied and authorized reference audio.

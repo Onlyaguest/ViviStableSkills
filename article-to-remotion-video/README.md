@@ -16,6 +16,13 @@ cd ./my-video && npm install && npm run start
 
 ## 可选配音
 
+首次使用 Cohub 时：
+
+1. [通过邀请链接注册 Cohub](https://cohub.live/referrals/M2p3aMZKISee)
+2. [加入推荐的文字转语音世界](https://cohub.live/yuanzi/wo-tui-hong-wo-vibe-coding/join/NoW4CJmuoNAt)
+
+加入后安装并登录 Cohub CLI，通过 `cohub spaces ls --json` 找到该世界对应的 Space ID。邀请链接仅用于可选的注册和加入，不会被脚本自动打开。
+
 先预览任务，不会调用远程生成：
 
 ```bash
