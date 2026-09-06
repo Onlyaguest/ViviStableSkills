@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "title": "One article, one video",
+    "sourceTitle": "Replace with the source article title",
+    "sourceUrl": "",
+    "authorVoice": "first-person, warm, concise",
+    "fps": 30,
+    "width": 1920,
+    "height": 1080
+  },
+  "theme": {
+    "background": "#07100F",
+    "panel": "#101A18",
+    "text": "#F4F0E7",
+    "muted": "#9DAAA4",
+    "primary": "#F16B42",
+    "success": "#57E0BD"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "type": "hero",
+      "durationSeconds": 8,
+      "kicker": "01 / HOOK",
+      "title": "One clear idea",
+      "accentTitle": "starts the story.",
+      "body": "Replace this sample with a source-grounded opening.",
+      "quote": "Keep the author's voice, not a generic summary."
+    },
+    {
+      "id": "action",
+      "type": "workflow",
+      "durationSeconds": 13,
+      "kicker": "02 / ACTION",
+      "title": "Show what changed",
+      "body": "Use a process when the article describes an actual workflow.",
+      "steps": ["Input", "Decision", "Action", "Result"],
+      "stats": [
+        {"value": "6", "label": "changed"},
+        {"value": "9", "label": "in view"},
+        {"value": "39", "label": "in history"}
+      ]
+    },
+    {
+      "id": "evidence",
+      "type": "chips",
+      "durationSeconds": 11,
+      "kicker": "03 / EVIDENCE",
+      "title": "Make evidence visible",
+      "body": "A bounded set works better than decorative effects.",
+      "chips": ["source", "facts", "numbers", "quotes", "limits", "result"]
+    },
+    {
+      "id": "result",
+      "type": "distribution",
+      "durationSeconds": 15,
+      "kicker": "04 / RESULT",
+      "title": "Turn the result into a picture",
+      "total": 57,
+      "totalLabel": "items",
+      "steps": ["Trigger", "App", "Script", "Report"],
+      "stats": [
+        {"value": "48", "label": "type A"},
+        {"value": "4", "label": "type B"},
+        {"value": "1", "label": "type C"},
+        {"value": "4", "label": "other"}
+      ],
+      "footer": "Keep an honest limitation on screen."
+    },
+    {
+      "id": "closing",
+      "type": "closing",
+      "durationSeconds": 8,
+      "kicker": "05 / CLOSE",
+      "title": "End with the meaning",
+      "accentTitle": "not another feature list.",
+      "body": "The final line should complete the causal arc.",
+      "badges": ["source-grounded", "locally rendered"]
+    }
+  ]
+}

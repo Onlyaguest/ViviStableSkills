@@ -1,0 +1,5 @@
+interface:
+  display_name: "文章转 Remotion 视频"
+  short_description: "把一篇文章变成带配音与验收记录的 Remotion 成片"
+  brand_color: "#F16B42"
+  default_prompt: "使用 $article-to-remotion-video 把这篇文章制作成可本地预览和导出的短视频。"

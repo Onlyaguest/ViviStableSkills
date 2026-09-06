@@ -1,0 +1,26 @@
+# 运行时数据
+data/
+output/
+out/
+build/
+narration/
+*__multilang__*/
+*__all-langs__*/
+
+# 敏感文件
+.env
+.env.*
+!.env.example
+credentials.json
+**/secrets/
+
+# 依赖与缓存
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# 系统/编辑器
+.DS_Store
+.idea/
+.vscode/
