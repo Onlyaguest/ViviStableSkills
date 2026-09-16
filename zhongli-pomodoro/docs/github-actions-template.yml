@@ -1,0 +1,16 @@
+name: Zhongli Pomodoro
+on:
+  push:
+    paths: ['zhongli-pomodoro/**', '.github/workflows/zhongli-pomodoro.yml']
+  pull_request:
+    paths: ['zhongli-pomodoro/**', '.github/workflows/zhongli-pomodoro.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test and build with placeholder assets
+        run: ./zhongli-pomodoro/tools/build.sh

@@ -1,0 +1,11 @@
+build/
+runtime/
+.DS_Store
+Assets/
+.env
+.env.*
+__pycache__/
+*.pyc
+.venv/
+data/
+output/
