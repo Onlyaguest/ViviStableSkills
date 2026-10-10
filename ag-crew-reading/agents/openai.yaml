@@ -1,0 +1,4 @@
+interface:
+  display_name: "AG CREW 围读与学会"
+  short_description: "多视角围读与可选学会模式，保留分歧和证据，交付可迁移 Markdown 与经验证的写回"
+  default_prompt: "用 $ag-crew-reading 围读这些文章，沿用已确认的执行路线，保留来源、角色分歧和可迁移 Markdown；按本次指定目标写回并验证。"

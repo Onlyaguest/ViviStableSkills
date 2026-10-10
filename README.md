@@ -9,6 +9,7 @@ Graduation dashboard: [graduation-overview.html](./graduation-overview.html)
 | Skill | Description | Platform |
 |-------|------------|----------|
 | [zhongli-pomodoro](./zhongli-pomodoro/) | 钟离版番茄钟：原生 Mac 桌宠与独立 Codex 陪伴模式 | macOS |
+| [ag-crew-reading](./ag-crew-reading/) | Evidence-based multi-perspective reading with optional guided learning; external integrations require setup | all |
 | [pomodoro](./pomodoro/) | AI-powered Pomodoro timer with auto-completion and local logging | macOS |
 | [i18n-translator](./i18n-translator/) | Multi-language website translation with AI (Gemini) | all |
 | [prompt-cards](./prompt-cards/) | Modular prompt card system with meta prompts, role cards, and workflows | all |

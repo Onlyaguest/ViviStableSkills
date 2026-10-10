@@ -1,0 +1,17 @@
+references/local-routing.md
+reader-profile.json
+**/reader-profile.json
+cases/
+data/
+output/
+*__multilang__*/
+*__all-langs__*/
+.env
+.env.*
+credentials.json
+**/secrets/
+.DS_Store
+__pycache__/
+*.pyc
+node_modules/
+.venv/
